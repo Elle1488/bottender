@@ -103,6 +103,26 @@ export async function setWebhook(
 
     const fields = config.fields || defaultFields;
 
+    const tokenInfo = await client.debugToken();
+
+    invariant(tokenInfo.is_valid, 'Page access token is invalid');
+    invariant(token.type === 'PAGE', 'Access token is not a page token');
+
+    const pageInfo = await client.getPageInfo();
+
+    // TODO: use cli-table3
+    // TODO: show token info - tokenInfo.expires_at === 0?
+    // TODO: show page name - pageInfo.name
+    // TODO: show app name - tokenInfo.application
+    // TODO: show scope - tokenInfo.scopes
+
+    const prompt = new Confirm(``);
+    const result = await prompt.run();
+
+    if (!result) {
+      return;
+    }
+
     const { success } = await client.createSubscription({
       app_id: config.appId,
       object: 'page',
