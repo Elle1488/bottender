@@ -15,8 +15,12 @@ class BrowserEvent {
     return this._rawEvent.message;
   }
 
-  get isTextMessage() {
+  get isText() {
     return true;
+  }
+
+  get text() {
+    return this._rawEvent.message.text;
   }
 }
 

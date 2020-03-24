@@ -4,7 +4,7 @@ import 'botui/build/botui.min.css';
 import 'botui/build/botui-theme-default.css';
 
 import BrowserBot from './BrowserBot';
-import handler from './handler';
+import BottenderApp from './BottenderApp';
 import './App.css';
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
       },
     });
 
-    bot.onEvent(handler);
+    bot.onEvent(BottenderApp);
 
     this.bot = bot;
   }

@@ -1,32 +1,29 @@
-const LUISClient = require('luis-sdk');
-const { ConsoleBot } = require('bottender');
+const { chain } = require('bottender');
+const luis = require('@bottender/luis');
 
-const luis = new LUISClient({
-  appId: process.env.APP_ID,
-  appKey: process.env.APP_KEY,
-  verbose: true,
+const { LUIS_APP_KEY, LUIS_APP_ENDPOINT, LUIS_APP_ID } = process.env;
+
+async function SayHello(context) {
+  await context.sendText('Hello!');
+}
+
+async function Unknown(context) {
+  await context.sendText('Sorry, I don’t know what you say.');
+}
+
+const Luis = luis({
+  appId: LUIS_APP_ID,
+  appKey: LUIS_APP_KEY,
+  endpoint: LUIS_APP_ENDPOINT,
+  actions: {
+    greeting: SayHello,
+  },
+  scoreThreshold: 0.7,
 });
 
-const bot = new ConsoleBot();
-
-bot.onEvent(async context => {
-  if (context.event.isText) {
-    try {
-      const response = await new Promise((resolve, reject) => {
-        luis.predict(context.event.text, {
-          onSuccess: resolve,
-          onFailure: reject,
-        });
-      });
-
-      await context.sendText(`Top Intent: ${response.topScoringIntent.intent}`);
-      await context.sendText(
-        `Entities:\n${response.entities.map(item => item.entity).join(', ')}`
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  }
-});
-
-bot.createRuntime();
+module.exports = async function App() {
+  return chain([
+    Luis, //
+    Unknown,
+  ]);
+};

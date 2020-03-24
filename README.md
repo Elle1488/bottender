@@ -1,61 +1,44 @@
 # Bottender
 
 [![npm](https://img.shields.io/npm/v/bottender.svg)](https://www.npmjs.com/package/bottender)
-[![npm@next](https://img.shields.io/npm/v/bottender/next.svg)](https://www.npmjs.com/package/bottender)
 [![CircleCI](https://circleci.com/gh/Yoctol/bottender.svg?style=shield)](https://circleci.com/gh/Yoctol/bottender)
 [![coverage](https://codecov.io/gh/Yoctol/bottender/branch/master/graph/badge.svg)](https://codecov.io/gh/Yoctol/bottender)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Yoctol/bottender#contributing)
-[![join chat](https://img.shields.io/badge/discord-join%20chat-green.svg)](https://discord.gg/unmFzmR)
-![](https://user-images.githubusercontent.com/662387/38478130-5ceff16c-3be9-11e8-9b2b-d9fc2e0925c0.png)
+[![join chat](https://img.shields.io/badge/discord-join%20chat-green.svg)](https://discord.gg/apNsWBz)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Yoctol/bottender)
+[![Follow @bottenderjs](https://img.shields.io/twitter/follow/bottenderjs.svg?label=Follow%20@bottenderjs)](https://twitter.com/intent/follow?screen_name=bottenderjs)
 
-* **Flexible** - Declare handlers as any JavaScript function.
+![](https://user-images.githubusercontent.com/3382565/76295244-3c80c800-62ef-11ea-88dc-a6039b3918c2.png)
 
-* **Modern** - Source written with ES6/ES7 syntax and great async await
-  supports.
+> The readme below is the documentation for the v1 (stable) version of Bottender. To view the documentation for the old Bottender version visit https://bottender.js.org/docs/0.15.17/getting-started
 
-* **Modular** - Use session stores, server framework adapters and platform
-  connectors with same interface.
+- **Declarative** - Bottender takes care of the complexity of conversational UIs for you. Design actions for each event and state in your application, and Bottender will run accordingly. his approach makes your code more predictable and easier to debug.
 
-* **Learn Once, Write Anywhere** - Handle multiple platforms with consistent
-  development experience.
+- **Native User Experience** - Bottender lets you create apps on every channel and never compromise on your users’ experience. You can apply progressive enhancement or graceful degradation strategy on your building blocks.
+
+- **Easy Setup** - With Bottender, you only need a few configurations to make your bot work with channels, automatic server listening, webhook setup, signature verification and so much more.
+
+- **Ready for Production** - There are thousands of bots powered by Bottender. It has been optimized for real world use cases, automatic batching request and dozens of other compelling features.
 
 Bottender is built on top of
 [Messaging APIs](https://github.com/Yoctol/messaging-apis).
 
 ## Installation
 
-You can install Bottender globally to use the cli tools:
+You can create a new Bottender app using the cli tools:
 
 ```sh
-npm install -g bottender
-```
-
-Or install it locally to use it programmatically:
-
-```sh
-npm install bottender
+npx create-bottender-app my-app
 ```
 
 Installation may fail on Windows during compilation of the native dependencies with `node-gyp`. To solve this problem, you can install [`windows-build-tools`](https://github.com/felixrieseberg/windows-build-tools#readme) or check [`node-gyp` documentation](https://github.com/nodejs/node-gyp#on-windows).
 
 ## Documentation
 
-You can find the Bottender documentation on the website.
+You can find the Bottender documentation [on the website](https://bottender.js.org?new).
 
-* [Getting Started](https://bottender.js.org/docs/GettingStarted)
-* [Platforms](https://bottender.js.org/docs/Platforms-Messenger)
-  * [Console](https://bottender.js.org/docs/Platforms-Console)
-  * [Messenger](https://bottender.js.org/docs/Platforms-Messenger)
-  * [LINE](https://bottender.js.org/docs/Platforms-LINE)
-  * [Slack](https://bottender.js.org/docs/Platforms-Slack)
-  * [Telegram](https://bottender.js.org/docs/Platforms-Telegram)
-  * [Viber](https://bottender.js.org/docs/Platforms-Viber)
-* [Guides](https://bottender.js.org/docs/Guides-Commands)
-  * [CLI commands](https://bottender.js.org/docs/Guides-Commands)
-  * [Server](https://bottender.js.org/docs/Guides-Server)
-  * [Session](https://bottender.js.org/docs/Guides-Session)
-* [API Reference](https://bottender.js.org/docs/APIReference-Context)
+Check out the [Getting Started](https://bottender.js.org/docs/getting-started?new) page for a quick overview.
 
 ## Community
 
@@ -70,68 +53,60 @@ We have a bunch of examples in the
 Here is the first one to get you started:
 
 ```js
-const { ConsoleBot } = require('bottender');
-
-const bot = new ConsoleBot();
-
-bot.onEvent(async context => {
+// index.js
+module.export = async function App(context) {
   await context.sendText('Hello World');
-});
+};
+```
 
-bot.createRuntime();
+```sh
+npx bottender start --console
 ```
 
 This will create and run a bot which always reply "Hello World" in the console.
-
-You'll notice that there is an async function to be passed to the `onEvent`
-method, we call it handler. You can put your bot logic in there.
 
 ## Notable Features
 
 ### Messenger
 
-* Messenger Profile Sync
-* Attachment Upload
-* Handover Protocol
-* Targeting Broadcast Messages
-* Built-in NLP
-* Multiple Pages
+- Messenger Profile Sync
+- Attachment Upload
+- Handover Protocol
+- Persona
+- Built-in NLP
+- Multiple Pages
 
 ### LINE
 
-* Reply, Push, Multicast
-* Imagemap
-* Rich Menu
-* Room, Group Chat
-* Beacon
+- Reply, Push, Multicast
+- Imagemap
+- Rich Menu
+- Room, Group Chat
+- Beacon
 
 ### Slack
 
-* Channel Chat
-* Interactive Message
+- Channel Chat
+- Interactive Message
 
 ### Telegram
 
-* Webhook, Long Polling
-* Update, Delete Messages
-* Keyboard
-* Group Chat
-* Inline Query
-* Message Live Location
-* Payment
+- Webhook, Long Polling
+- Update, Delete Messages
+- Keyboard
+- Group Chat
+- Inline Query
+- Message Live Location
+- Payment
 
 ### Viber
 
-* Subscribed, Unsubscribed Event
-* Delivered, Seen Event
+- Subscribed, Unsubscribed Event
+- Delivered, Seen Event
 
 ## Ecosystem
 
 - [bottender-compose](https://github.com/Yoctol/bottender-compose) - An utility library for Bottender and higher-order handlers.
-
-## Introduction Video
-
-[![](https://user-images.githubusercontent.com/3382565/33467982-cc8a0e42-d693-11e7-9134-2d42ec135e19.png)](https://www.youtube.com/watch?v=C_OBHmbXCsE)
 
 ## Contributing
 
@@ -158,6 +133,18 @@ yarn test
 ```
 
 Make your changes and tests, and make sure the tests pass.
+
+### Contribute using the online one-click setup
+
+You can use Gitpod(a free online VS Code-like) for contributing. With a single click it will launch a workspace and automatically:
+
+- clone the bottender repo.
+- install the dependencies.
+- run `yarn run start`.
+
+So that you can start straight away.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Yoctol/bottender)
 
 ## License
 
